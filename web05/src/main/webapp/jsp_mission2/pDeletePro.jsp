@@ -1,0 +1,59 @@
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h3>pDeletePro</h3>
+	<%
+request.setCharacterEncoding("UTF-8");
+
+int pno = Integer.parseInt(request.getParameter("pno"));
+
+
+/* 전달받은 내용을 DB에 입력
+db에 연동 */
+
+Connection conn=null;
+PreparedStatement pstmt=null;
+String sql="";
+
+try {
+	String url="jdbc:oracle:thin:@localhost:1521:xe";
+	String driver="oracle.jdbc.driver.OracleDriver";
+	String user="hr";
+	String pass="123456";
+	Class.forName(driver);
+	conn=DriverManager.getConnection(url,user,pass);
+	
+	//id를 조건으로 name과 addr 변경
+	sql="delete from productinfo where pno=?";
+	pstmt=conn.prepareStatement(sql);
+	pstmt.setInt(1, pno);
+	
+	//실행
+	pstmt.executeUpdate();//insert 실행
+	System.out.println("삭제성공");
+	
+}catch(Exception e){
+	out.print("삭제실패");
+	e.printStackTrace();
+}finally{
+	//자원 회수
+	if(pstmt!=null) try{pstmt.close();} catch(Exception e2){}
+	if(conn!=null) try{conn.close();} catch(Exception e2){}
+}
+response.sendRedirect("pSelectPro.jsp");
+%>
+
+
+<%=pno %> <br />
+
+</body>
+</html>
