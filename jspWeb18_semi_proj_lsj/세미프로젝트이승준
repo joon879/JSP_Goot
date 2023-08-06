@@ -1,0 +1,86 @@
+세미 프로젝트 jsp 이승준
+
+
+진행상황(세부작업상황)
+1. 로그인 완성(컨트롤러, Dao, vo로 나눠서 구현 추가)
+2. 로그아웃 완성(컨트롤러, Dao, vo로 나눠서 구현 추가)
+3. 회원가입 완성(컨트롤러, Dao, vo로 나눠서 구현 추가)
+3. 게시판 리스트 완성(로그인 시 로그아웃, 글쓰기 버튼 활성화)
+4. 게시판 글쓰기 완성(로그인 한 사용자로 작성자 등록)
+5. 게시판 수정 완성(글 작성자만 수정 가능 추가)
+6. 게시판 삭제 완성(글 작성자만 삭제 가능 추가)
+7. 게시판 검색 완성
+8. 조회수 완성
+9. 업로드 완성
+10. 다운로드 완성
+11. 좋아요 미완성(좋아요 버튼 누를 시 +1)
+
+-------------------------------------------------------------------------
+
+프로젝트관련 sql작성
+
+- 게시판 테이블생성(sjnavercafe)
+create table sjnavercafe(
+sjno varchar2(10),
+sjtitle varchar2(200),
+sjwriter varchar2(10),
+sjcontent varchar2(1000),
+sjdate timestamp,
+sjhit number,
+sjlike number,
+sjfile varchar2(300));
+
+
+- insert
+String sql = "insert into sjnavercafe values("
+				+"(select max(to_number(sjno))+1 from sjnavercafe)"
+				+", ?, ?, ?, sysdate, 0, 0, ?)";
+
+- update
+String sql = "update sjnavercafe " + "set sjtitle=?, sjcontent=? where sjno=?";
+
+- delete
+String sql = "delete from sjnavercafe where sjno =" + sjno;
+
+- search
+String sql = "select sjno, sjtitle, sjwriter, sjcontent, sjdate, "
+				+"sjhit, sjlike, sjfile from sjnavercafe "
+				+"where "+field+" like ? "
+				+"order by to_number(sjno) desc";
+				
+- getSjCafe(디테일 화면)
+String sql = "select sjno, sjtitle, sjwriter, sjcontent, sjdate, "
+			+"sjhit, sjlike, sjfile from sjnavercafe "
+			+"where sjno="+sjno;
+			
+- hotUpdate(조회수 업데이트)
+String sql = "update sjnavercafe set sjhit = ? where sjno = ?";
+
+
+
+- 회원 테이블(sjmember)
+create table sjmember(
+sjid varchar2(50),
+sjpwd varchar2(50),
+sjname varchar2(50),
+sjgender varchar2(10),
+sjbirth varchar2(10),
+sjis_lunar varchar2(10),
+sjcphone varchar2(15),
+sjemail varchar2(50),
+sjhabit varchar2(200),
+sjregdate date
+);
+
+- getSjMember(로그인)
+String sql = "select sjid, sjpwd, sjname, sjgender, sjbirth, "
+				+ "sjis_lunar, sjcphone, sjemail, sjhabit, sjregdate "
+				+ "from sjmember where sjid=?";
+
+- joinSjMember(회원가입)
+String sql = "insert into sjmember values("
+				+"?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate)";
+
+-------------------------------------------------------------------------
+기능별 캡쳐사진(결과이미지 폴더에)
+

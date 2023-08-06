@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+table{
+	width: 100%;
+	border-top: 1px solid black;
+	border-collapse: collapse;
+}
+
+td{
+	padding: 10px;
+}
+
+
+.title{
+	font-size: 50px;
+	border-left: 0;
+	border-right: 0;
+}
+
+.writer{
+	font-size: 25px;
+	border-left: 0;
+	border-right: 0;
+}
+
+.date{
+	font-size: 15px;
+	border-left: 0;
+	border-right: 0;
+}
+
+
+
+.content{
+	white-space: normal;
+	border-bottom: 1px solid black;
+}
+
+div#edit{
+	font-size: 30;
+	font-wight: bold;
+}

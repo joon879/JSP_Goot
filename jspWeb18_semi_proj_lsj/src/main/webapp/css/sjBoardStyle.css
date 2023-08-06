@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+div#logo{
+	text-align: center;
+	background-color: #5E9E4C;
+}
+
+div#search{
+	text-align: center;
+	height: 200px;
+	background-color: #5E9E4C;
+	
+}
+
+#search{
+	text-align: center;
+	content: 100%;
+}
+
+.log{
+	text-align: right;
+	font-size: 120%;
+	font-weight: bold;
+	
+}
+
+#write{
+	text-align: right;
+	font-size: 120%;
+	font-weight: bold;
+}
+
+table{
+	width: 100%;
+	border-top: 1px solid black;
+	border-collapse: collapse;
+}
+
+td{
+	border-bottom: 1px solid black;
+	padding: 10px;
+}
+
+h3{
+	background-color: #5E9E4C;
+}
